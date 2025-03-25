@@ -15,9 +15,10 @@ const BlogDetailsPage = async ({
   params: Promise<{ blogId: string }>;
 }) => {
   const { blogId } = await params;
+  // blog data fetching
   const res = await fetch(`http://localhost:5000/blogs/${blogId}`);
   const blog = await res.json();
-  console.log(blog);
+  // console.log(blog);
   return (
     <div>
       <BlogDetailsCard blog={blog} />
