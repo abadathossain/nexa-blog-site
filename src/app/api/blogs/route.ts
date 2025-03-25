@@ -28,3 +28,18 @@ const blogs = [
 export const GET = async () => {
   return NextResponse.json(blogs);
 };
+
+export const POST = async (request: Request) => {
+  const blog = await request.json();
+  const newBLog = {
+    ...blog,
+    id: blogs.length + 1,
+  };
+  blogs.push(newBLog);
+  return new NextResponse(JSON.stringify(newBLog), {
+    status: 201,
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+};
