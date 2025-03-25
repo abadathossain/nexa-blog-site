@@ -1,17 +1,26 @@
+"use client";
 import BlogCard from "@/components/ui/BlogCard";
 import { Blog } from "@/types";
-import { Metadata } from "next";
+// import { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: "Blogs",
-  description:
-    "Dive into the fascinating world of quantum computing, where unlocking unprecedented computational power.",
-};
+import { useGetBlogsQuery } from "@/redux/apis/blogs.slice";
+import Spinner from "@/components/ui/Spinner";
 
-const Blogs = async () => {
-  const res = await fetch(`http://localhost:5000/blogs`);
-  const blogs = await res.json();
-  console.log(blogs);
+// export const metadata: Metadata = {
+//   title: "Blogs",
+//   description:
+//     "Dive into the fascinating world of quantum computing, where unlocking unprecedented computational power.",
+// };
+
+const BlogsPage = () => {
+  // const res = await fetch(`http://localhost:5000/blogs`);
+  // const blogs = await res.json();
+  // console.log(blogs);
+  const { data: blogs, isLoading } = useGetBlogsQuery({});
+  // console.log(data);
+  if (isLoading) {
+    return <Spinner></Spinner>;
+  }
   return (
     <div>
       <h1 className="text-3xl text-center my-5 font-bold">
@@ -32,4 +41,4 @@ const Blogs = async () => {
   );
 };
 
-export default Blogs;
+export default BlogsPage;
